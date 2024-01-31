@@ -1,44 +1,36 @@
+#include "src\camera.cpp"
+#include "src\tile.cpp"
 #include "src\player.cpp"
+#include "src\blueFlower.cpp"
 
-#define WINDOW_WIDHT 800
-#define WINDOW_HEIGHT 600
+#define WINDOW_WIDHT 1366
+#define WINDOW_HEIGHT 768
 
 sf::Event event;
 sf::View view;
 sf::Clock gameClock;
+
 float deltaTime;
 const float gravity = 600.f;
 
-// map
-sf::Texture bgTexture;
-sf::Sprite bg(bgTexture);
-
-// anu
-sf::RectangleShape obs(sf::Vector2f(120.f, 60.f));
-
-// text
-sf::Font font;
-sf::Text text;
-
-int8_t setGame();
-
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(WINDOW_WIDHT, WINDOW_HEIGHT), "wizard nolep");
+    sf::RenderWindow window(sf::VideoMode(WINDOW_WIDHT, WINDOW_HEIGHT), "wizard nolep", sf::Style::Fullscreen);
     window.setFramerateLimit(60);
-
-    if (setGame() == EXIT_FAILURE)
-        return EXIT_FAILURE;
 
     gameClock.restart();
 
-    Player player(sf::Vector2f(WINDOW_WIDHT / 2, WINDOW_HEIGHT / 2));
-    view.setViewport(sf::FloatRect(0.f, 0., 1.f, 1.f));
+    // TILES
+    Tile ground1(sf::Vector2f(WINDOW_WIDHT / 2, WINDOW_HEIGHT - 200));
 
-    bgTexture.loadFromFile("rsc\\envrironment\\map\\pixel-city.jpg");
+    // PLAYER
+    Player player(sf::Vector2f(ground1.getPosition().x, ground1.getPosition().y - 1380.f));
 
-    obs.setFillColor(sf::Color::Blue);
-    obs.setPosition(WINDOW_WIDHT / 2, WINDOW_HEIGHT / 2);
+    // BLUE FLOWER
+    BlueFlower blueFlower1(sf::Vector2f(ground1.getPosition().x + 50.f, ground1.getPosition().y - 260.f));
+
+    // view.setViewport(sf::FloatRect(0.f, 0., 1.f, 1.f));
+
 
     while (window.isOpen())
     {
@@ -55,30 +47,19 @@ int main()
 
         deltaTime = gameClock.restart().asSeconds();
 
-        player.update(gravity, deltaTime);
-        // blueFlower1Animation(blueFlower1AnimationDelay);
+        player.update(gravity, deltaTime, ground1);
+        blueFlower1.update();
 
-        view.setCenter(player.getPosition().x, 0);
+        view.setCenter(player.getPosition().x + 70.f, player.getPosition().y - 200.f);
+
         window.setView(view);
 
         window.clear();
-        window.draw(bg);
         window.draw(player);
-        window.draw(obs);
-        // window.draw(blueFlower1);
+        window.draw(blueFlower1);
+        window.draw(ground1);
         window.display();
     }
-
-    return EXIT_SUCCESS;
-}
-
-int8_t setGame()
-{
-    // text
-    // font.loadFromFile("res\\font\\tuffy.ttf");
-    // text.setFont(font);
-    // text.setString("Loading..");
-    // text.setPosition(WINDOW_WIDHT / 2, WINDOW_HEIGHT / 2);
 
     return EXIT_SUCCESS;
 }
