@@ -1,4 +1,4 @@
-#include "hpp\BlueFlower.hpp"
+#include "../include/BlueFlower.hpp"
 #include <string>
 
 BlueFlower::BlueFlower(sf::Vector2f position)
@@ -6,7 +6,7 @@ BlueFlower::BlueFlower(sf::Vector2f position)
     // BlueFlower
     for (int8_t i = 0; i < m_texture.size(); i++)
     {
-        m_texture[i].loadFromFile("res\\environment\\plants\\BlueFlower1\\" + std::to_string(i) + ".png");
+        m_texture[i].loadFromFile("../assets/environment/plants/BlueFlower1/" + std::to_string(i) + ".png");
     }
 
     this->setScale(m_scaleX, m_scaleY);

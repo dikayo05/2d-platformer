@@ -1,4 +1,4 @@
-#include "hpp\Camera.hpp"
+#include "../include/Camera.hpp"
 
 Camera::Camera(/* args */)
 {

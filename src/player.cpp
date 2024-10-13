@@ -1,4 +1,4 @@
-#include "hpp\Player.hpp"
+#include "../include/Player.hpp"
 #include <string>
 
 Player::Player(sf::Vector2f position)
@@ -6,12 +6,12 @@ Player::Player(sf::Vector2f position)
     // player
     for (int8_t i = 0; i < m_textureIdle.size(); i++)
     {
-        m_textureIdle[i].loadFromFile("res\\player\\BlueWizard\\Idle\\" + std::to_string(i) + ".png", sf::IntRect(178.5f, 116, m_pixelSizeX, m_pixelSizeY));
-        m_textureWalk[i].loadFromFile("res\\player\\BlueWizard\\Walk\\" + std::to_string(i) + ".png", sf::IntRect(178.5f, 116, m_pixelSizeX, m_pixelSizeY));
+        m_textureIdle[i].loadFromFile("../assets/player/BlueWizard/Idle/" + std::to_string(i) + ".png", sf::IntRect(178.5f, 116, m_pixelSizeX, m_pixelSizeY));
+        m_textureWalk[i].loadFromFile("../assets/player/BlueWizard/Walk/" + std::to_string(i) + ".png", sf::IntRect(178.5f, 116, m_pixelSizeX, m_pixelSizeY));
     }
     for (int8_t i = 0; i < m_textureJump.size(); i++)
     {
-        m_textureJump[i].loadFromFile("res\\player\\BlueWizard\\Jump\\" + std::to_string(i) + ".png");
+        m_textureJump[i].loadFromFile("../assets/player/BlueWizard/Jump/" + std::to_string(i) + ".png");
     }
 
     this->setScale(m_scaleX, m_scaleY);
